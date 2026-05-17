@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Doctor Join</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2>Doctor Registration</h2>
+
+<input type="text" id="name" placeholder="Doctor Name"><br><br>
+<input type="text" id="speciality" placeholder="Speciality"><br><br>
+<input type="text" id="phone" placeholder="WhatsApp Number"><br><br>
+
+<button onclick="saveDoctor()">Submit</button>
+
+<script>
+function saveDoctor(){
+    let name = document.getElementById("name").value;
+    let speciality = document.getElementById("speciality").value;
+    let phone = document.getElementById("phone").value;
+
+    let data = {
+        name, speciality, phone
+    };
+
+    localStorage.setItem("doctor_"+name, JSON.stringify(data));
+
+    alert("Doctor Added Successfully");
+}
+</script>
+
+</body>
+</html>
