@@ -1,129 +1,160 @@
-body{
+*{
     margin:0;
-    font-family:sans-serif;
-    background:linear-gradient(135deg,#0a3d62,#1e90ff);
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#061a33;
     color:white;
-    padding-top:80px;
 }
 
 /* HEADER */
 header{
-    position:fixed;
-    top:0;
-    width:100%;
-    background:#0a3d62;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px 20px;
-    z-index:1000;
-    box-sizing:border-box;
+    padding:18px 60px;
+    background:#071c36;
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:100;
 }
 
-nav{
-    display:flex;
-    gap:25px;
-    flex-wrap:wrap;   /* 🔥 IMPORTANT */
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    color:#4aa3ff;
 }
 
 nav a{
-    color:white;
+    margin:0 15px;
     text-decoration:none;
-    font-weight:bold;
-    white-space:nowrap;  /* 🔥 TEXT CUT NA HO */
+    color:white;
+    font-weight:500;
 }
 
-nav a:hover{
-    color:#00b894;
+nav a.active{
+    border-bottom:2px solid #4aa3ff;
+    padding-bottom:5px;
 }
 
 /* HERO */
 .hero{
-    text-align:center;
-    margin-top:120px;
-    padding:60px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:130px 60px 60px;
+    background:linear-gradient(135deg,#0a3d62,#1e90ff);
 }
 
-.hero h2{
-    font: size 40px;px;
-    margin-bottom:10px;
+.hero-left{
+    max-width:50%;
 }
+
+.tag{
+    background:#00c2a8;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+.hero h1{
+    font-size:52px;
+    margin:20px 0;
+}
+
 .hero p{
-    opacity:0.8;
+    font-size:18px;
+    opacity:0.9;
+    margin-bottom:25px;
+}
+
+/* BUTTONS */
+.buttons{
+    display:flex;
+    gap:15px;
 }
 
 .btn{
-    background:linear-gradient(45deg,#00b894,#00cec9);
-    padding:12px 25px;
-    color:white;
-    text-decoration:none;
-    margin:10px;
-    display:inline-block;
-    border-radius:30px;
-    transition:0.3s;
-}
-.btn:hover{
-    transform:scale(1.05);
-}
-
-.btn{
-    background:#00b894;
-    padding:10px 20px;
-    color:white;
-    text-decoration:none;
-    margin:10px;
-    display:inline-block;
-    border-radius:6px;
-}
-
-/* CARD */
-.card{
-    background:white;
-    color:black;
-    padding:20px;
-    margin:20px
-    border: radius 15px;
-    width:280px;
-    text-align:center;
-     box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    transition:0.3s;
-}
-.card:hover{
-    transform:translateY(-10px);
-}
-
-/* FORM */
-.form-box{
-    text-align:center;
-    margin-top:120px;
-}
-
-input{
-    padding:10px;
-    width:250px;
-    margin:10px;
-    border-radius:5px;
+    padding:12px 18px;
     border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
 }
 
-/* BACK BUTTON */
-.back{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:black;
-    padding:10px 15px;
+.blue{
+    background:#1e90ff;
     color:white;
-    text-decoration:none;
-    border-radius:5px;
 }
+
+.green{
+    background:#00c26f;
+    color:white;
+}
+
+/* IMAGE */
+.hero-right img{
+    width:380px;
+    border-radius:20px;
+}
+
+/* FEATURES */
 .features{
+    padding:70px 60px;
+    text-align:center;
+}
+
+.features h2{
+    margin-bottom:30px;
+}
+
+.feature-box{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.card{
+    background:#0b2a52;
+    padding:25px;
+    border-radius:12px;
+    flex:1;
+}
+
+.card p{
+    opacity:0.8;
+    margin-top:10px;
+}
+.image-card{
+    padding:70px 60px;
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
-    margin-top:50px;
 }
-img{
-    border-radius:50%;
-    border:2px solid white;
+
+.image-box{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:20px;
+}
+
+/* IMAGE CARD STYLE */
+.image-box img{
+    width:160px;              /* 👈 bigger size */
+    height:140px;
+    object-fit:cover;
+    border-radius:12px;
+    transition:0.3s ease;
+    box-shadow:0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* hover effect (premium feel) */
+.image-box img:hover{
+    transform:scale(1.1);
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
 }

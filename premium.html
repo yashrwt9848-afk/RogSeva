@@ -12,7 +12,7 @@
 <div class="card">
     <h3>Basic</h3>
     <p>₹199/month</p>
-   <button class="btn" onclick="payNow()">Buy Premium</button>
+    <button class="btn" onclick="payNow()">Buy Premium</button>
 </div>
 
 <div class="card">
@@ -24,10 +24,24 @@
 <a href="index.html" class="back">⬅ Back</a>
 
 <script>
-function buy(){
-    alert("Payment system coming soon");
+function payNow(){
+    alert("Payment system connected (Demo Mode)");
+
+    let email = localStorage.getItem("currentUserEmail");
+
+    for(let i=0;i<localStorage.length;i++){
+        let key = localStorage.key(i);
+
+        if(key.startsWith("doc_")){
+            let d = JSON.parse(localStorage.getItem(key));
+
+            if(d.email === email){
+                d.premium = true;
+                localStorage.setItem(key, JSON.stringify(d));
+            }
+        }
+    }
 }
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </script>
 
 </body>
