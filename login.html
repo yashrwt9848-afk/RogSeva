@@ -48,8 +48,29 @@ function login(){
 
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then(() => {
-    alert("Login Success");
-    window.location.href="index.html";
+  localStorage.setItem("currentUserEmail", email);
+
+  // 🔍 CHECK PROFILE EXIST
+  let hasProfile = false;
+
+  for(let i=0;i<localStorage.length;i++){
+    let key = localStorage.key(i);
+
+    if(key.startsWith("doc_")){
+      let d = JSON.parse(localStorage.getItem(key));
+      if(d.email === email){
+        hasProfile = true;
+      }
+    }
+  }
+
+  // 🔁 REDIRECT
+  if(hasProfile){
+    window.location.href = "dashboard.html";
+  } else {
+    window.location.href = "doctor.html";
+  }
+})
   })
   .catch(err => alert(err.message));
 }

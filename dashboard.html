@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Doctor Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="form-box">
+<h2>👨‍⚕️ Doctor Dashboard</h2>
+
+<input id="name" placeholder="Doctor Name"><br>
+<input id="spec" placeholder="Speciality"><br>
+<input id="phone" placeholder="WhatsApp Number"><br><br>
+<input type="file" onchange="upload(event)"><br><br>
+<img id="preview" width="100"><br><br>
+
+<p id="premiumStatus"></p><br>
+
+<button class="btn" onclick="update()">💾 Update Profile</button>
+<button class="btn" onclick="logout()">🚪 Logout</button>
+<button onclick="window.location.href='payment.html'">💰 Go Premium</button>
+
+</div>
+
+<script>
+let email = localStorage.getItem("currentUserEmail");
+let currentKey = "";
+
+// 🚫 Login check
+if(!email){
+    alert("Please login first ❌");
+    window.location.href = "login.html";
+}
+
+// 🔍 Load doctor data
+for(let i=0;i<localStorage.length;i++){
+    let key = localStorage.key(i);
+
+    if(key.startsWith("doc_")){
+        let d = JSON.parse(localStorage.getItem(key));
+
+        if(d.email === email){
+            if(d.photo){
+    document.getElementById("preview").src = d.photo;
+}
+            document.getElementById("name").value = d.name;
+            document.getElementById("spec").value = d.spec;
+            document.getElementById("phone").value = d.phone;
+
+            // ⭐ Premium Status
+            if(d.premium){
+                document.getElementById("premiumStatus").innerHTML = "🌟 Premium Doctor";
+            } else {
+                document.getElementById("premiumStatus").innerHTML = "❌ Normal Doctor";
+            }
+
+            currentKey = key;
+        }
+    }
+}
+
+// ❌ Profile not found
+if(currentKey === ""){
+    alert("Profile not found ❌");
+    window.location.href = "doctor.html";
+}
+
+// 💾 Update profile
+function update(){
+    let old = JSON.parse(localStorage.getItem(currentKey));
+
+    let d = {
+        name: document.getElementById("name").value,
+        spec: document.getElementById("spec").value,
+        phone: document.getElementById("phone").value,
+        email: email,
+        premium: old.premium
+    };
+
+    localStorage.setItem(currentKey, JSON.stringify(d));
+    alert("Profile Updated ✅");
+}
+
+// 🚪 Logout
+function logout(){
+    localStorage.removeItem("currentUserEmail");
+    alert("Logged out 👋");
+    window.location.href = "login.html";
+}
+function upload(e){
+    let file = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload = function(){
+        let img = reader.result;
+
+        let d = JSON.parse(localStorage.getItem(currentKey));
+        d.photo = img;
+
+        localStorage.setItem(currentKey, JSON.stringify(d));
+
+        document.getElementById("preview").src = img;
+    }
+
+    reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>

@@ -1,34 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Doctor Join</title>
+<title>Join Doctor</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h2>Doctor Registration</h2>
+<div class="form-box">
+<h2>Doctor Registration 🩺</h2>
 
-<input type="text" id="name" placeholder="Doctor Name"><br><br>
-<input type="text" id="speciality" placeholder="Speciality"><br><br>
-<input type="text" id="phone" placeholder="WhatsApp Number"><br><br>
+<input id="name" placeholder="Doctor Name"><br>
+<input id="spec" placeholder="Speciality"><br>
+<input id="phone" placeholder="WhatsApp Number"><br>
 
-<button onclick="saveDoctor()">Submit</button>
+<button class="btn" onclick="save()">Register</button>
+</div>
+
+<a href="index.html" class="back">⬅ Back</a>
 
 <script>
-function saveDoctor(){
-    let name = document.getElementById("name").value;
-    let speciality = document.getElementById("speciality").value;
-    let phone = document.getElementById("phone").value;
 
-    let data = {
-        name, speciality, phone
+function save(){
+
+    // 🔐 LOGIN CHECK
+    let email = localStorage.getItem("currentUserEmail");
+
+    if(!email){
+        alert("Please login first ❌");
+        window.location.href = "login.html";
+        return;
+    }
+
+    // 📥 INPUT VALUES
+    let nameInput = document.getElementById("name");
+    let specInput = document.getElementById("spec");
+    let phoneInput = document.getElementById("phone");
+
+    let name = nameInput.value.trim();
+    let spec = specInput.value.trim();
+    let phone = phoneInput.value.trim();
+
+    // 🚨 VALIDATION
+    if(name === "" || spec === "" || phone === ""){
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // 🔥 UNIQUE KEY (duplicate fix)
+    let key = "doc_" + Date.now();
+
+    let d = {
+        name: name,
+        spec: spec,
+        phone: phone,
+        email: email,
+        premium: false
     };
 
-    localStorage.setItem("doctor_"+name, JSON.stringify(data));
+    // 💾 SAVE
+    localStorage.setItem(key, JSON.stringify(d));
 
-    alert("Doctor Added Successfully");
+    alert("Doctor Added Successfully ✅");
+
+    // 🧹 CLEAR FORM
+    nameInput.value = "";
+    specInput.value = "";
+    phoneInput.value = "";
+
+    // 🔁 REDIRECT
+    window.location.href = "doctors.html";
 }
+
 </script>
 
 </body>

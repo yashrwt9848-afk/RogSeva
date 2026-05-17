@@ -1,49 +1,129 @@
 body{
-    font-family:Arial;
-    background:#0a3d62;
+    margin:0;
+    font-family:sans-serif;
+    background:linear-gradient(135deg,#0a3d62,#1e90ff);
     color:white;
+    padding-top:80px;
 }
 
+/* HEADER */
 header{
-    background:#081f3a;
-    padding:15px;
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#0a3d62;
     display:flex;
     justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    z-index:1000;
+    box-sizing:border-box;
+}
+
+nav{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;   /* 🔥 IMPORTANT */
 }
 
 nav a{
     color:white;
-    margin:10px;
     text-decoration:none;
+    font-weight:bold;
+    white-space:nowrap;  /* 🔥 TEXT CUT NA HO */
 }
 
+nav a:hover{
+    color:#00b894;
+}
+
+/* HERO */
 .hero{
     text-align:center;
-    padding:100px 20px;
+    margin-top:120px;
+    padding:60px 20px;
 }
 
-.cards{
-    display:flex;
-    gap:20px;
-    justify-content:center;
+.hero h2{
+    font: size 40px;px;
+    margin-bottom:10px;
+}
+.hero p{
+    opacity:0.8;
 }
 
-.card{
-    background:#ffffff20;
-    padding:20px;
-    border-radius:10px;
-}
-
-.join-btn{
-    background:#00d2ff;
-    padding:5px 10px;
-}
 .btn{
-    display:inline-block;
-    padding:10px 20px;
-    background:#00b894;
+    background:linear-gradient(45deg,#00b894,#00cec9);
+    padding:12px 25px;
     color:white;
     text-decoration:none;
     margin:10px;
+    display:inline-block;
+    border-radius:30px;
+    transition:0.3s;
+}
+.btn:hover{
+    transform:scale(1.05);
+}
+
+.btn{
+    background:#00b894;
+    padding:10px 20px;
+    color:white;
+    text-decoration:none;
+    margin:10px;
+    display:inline-block;
+    border-radius:6px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    color:black;
+    padding:20px;
+    margin:20px
+    border: radius 15px;
+    width:280px;
+    text-align:center;
+     box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-10px);
+}
+
+/* FORM */
+.form-box{
+    text-align:center;
+    margin-top:120px;
+}
+
+input{
+    padding:10px;
+    width:250px;
+    margin:10px;
     border-radius:5px;
+    border:none;
+}
+
+/* BACK BUTTON */
+.back{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:black;
+    padding:10px 15px;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+.features{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:50px;
+}
+img{
+    border-radius:50%;
+    border:2px solid white;
 }

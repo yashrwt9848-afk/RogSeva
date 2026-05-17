@@ -1,18 +1,18 @@
-let isLoggedIn = false;
+function payNow(){
+    var options = {
+        "key": "YOUR_RAZORPAY_KEY", // ⚠️ apni key dalna
+        "amount": 19900, // ₹199
+        "currency": "INR",
+        "name": "RogSeva",
+        "description": "Doctor Premium Plan",
+        "handler": function (response){
+            alert("Payment Successful ✅");
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    isLoggedIn = true;
-  } else {
-    isLoggedIn = false;
-  }
-});
+            // Premium activate
+            localStorage.setItem("premium_user","yes");
+        }
+    };
 
-function checkPremium(){
-  if(!isLoggedIn){
-    alert("🔒 Login Required");
-    window.location.href="login.html";
-  } else {
-    window.location.href="premium.html";
-  }
+    var rzp = new Razorpay(options);
+    rzp.open();
 }

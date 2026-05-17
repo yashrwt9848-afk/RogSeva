@@ -7,27 +7,58 @@
 
 <body>
 
-<h2>Available Doctors</h2>
+<h2 style="text-align:center;margin-top:100px;">Doctors List</h2>
 
+<!-- 🔥 YE MISSING THA -->
 <div id="list"></div>
 
+<a href="index.html" class="back">⬅ Back</a>
+
 <script>
+
 let list = document.getElementById("list");
 
-for(let i=0; i<localStorage.length; i++){
+// SAFETY CHECK
+if(!list){
+    alert("List div missing!");
+}
+
+// CHECK IF ANY DOCTOR EXISTS
+let hasDoctor = false;
+
+for(let i=0;i<localStorage.length;i++){
+    let key = localStorage.key(i);
+    if(key.startsWith("doc_")){
+        hasDoctor = true;
+    }
+}
+
+// DEMO ADD
+if(!hasDoctor){
+    let demo = {
+        name:"Dr Sharma",
+        spec:"General Physician",
+        phone:"919999999999"
+    };
+    localStorage.setItem("doc_demo", JSON.stringify(demo));
+}
+
+// SHOW LIST
+for(let i=0;i<localStorage.length;i++){
     let key = localStorage.key(i);
 
-    if(key.startsWith("doctor_")){
-        let doc = JSON.parse(localStorage.getItem(key));
+    if(key.startsWith("doc_")){
+        let d = JSON.parse(localStorage.getItem(key));
 
         list.innerHTML += `
         <div class="card">
-            <h3>${doc.name}</h3>
-            <p>${doc.speciality}</p>
-            <a href="https://wa.me/${doc.phone}">Chat</a>
+            <h3>${d.name} ${d.premium ? "🏆" : ""}</h3>
+            <p>${d.spec}</p>
+            <a class="btn" href="https://wa.me/${d.phone}">Consult</a>
         </div>`;
     }
 }
+
 </script>
 
 </body>

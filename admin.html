@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h2 style="text-align:center;margin-top:100px;">👑 Admin Panel</h2>
+
+<div id="adminList"></div>
+
+<a href="index.html" class="back">⬅ Back</a>
+
+<script>
+
+// 🔐 PASSWORD
+let pass = prompt("Enter Admin Password");
+if(pass !== "1234"){
+    alert("Wrong Password ❌");
+    window.location.href = "index.html";
+}
+
+// 🔥 GET DIV
+let list = document.getElementById("adminList");
+
+// 🔥 LOAD DOCTORS
+for(let i=0;i<localStorage.length;i++){
+    let key = localStorage.key(i);
+
+    if(key.startsWith("doc_")){
+        let d = JSON.parse(localStorage.getItem(key));
+
+        list.innerHTML += `
+        <div class="card">
+            <h3>${d.name} ${d.premium ? "🏆" : ""}</h3>
+            <p>${d.spec}</p>
+
+            <button onclick="makePremium('${key}')" class="btn">Make Premium</button>
+            <button onclick="deleteDoc('${key}')" class="btn" style="background:red;">Delete</button>
+        </div>`;
+    }
+}
+
+// 🏆 PREMIUM
+function makePremium(key){
+    let d = JSON.parse(localStorage.getItem(key));
+    d.premium = true;
+
+    localStorage.setItem(key, JSON.stringify(d));
+    alert("Now Premium 🏆");
+    location.reload();
+}
+
+// ❌ DELETE
+function deleteDoc(key){
+    if(confirm("Delete this doctor?")){
+        localStorage.removeItem(key);
+        location.reload();
+    }
+}
+
+</script>
+
+</body>
+</html>
