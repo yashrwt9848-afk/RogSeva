@@ -13,6 +13,7 @@
 <input id="name" placeholder="Doctor Name"><br>
 <input id="spec" placeholder="Speciality"><br>
 <input id="phone" placeholder="WhatsApp Number"><br><br>
+
 <input type="file" onchange="upload(event)"><br><br>
 <img id="preview" width="100"><br><br>
 
@@ -20,6 +21,11 @@
 
 <button class="btn" onclick="update()">💾 Update Profile</button>
 <button class="btn" onclick="logout()">🚪 Logout</button>
+
+<h3>📅 Appointments</h3>
+<div id="appointments"></div>
+
+<br>
 <button onclick="window.location.href='payment.html'">💰 Go Premium</button>
 
 </div>
@@ -42,9 +48,11 @@ for(let i=0;i<localStorage.length;i++){
         let d = JSON.parse(localStorage.getItem(key));
 
         if(d.email === email){
+
             if(d.photo){
-    document.getElementById("preview").src = d.photo;
-}
+                document.getElementById("preview").src = d.photo;
+            }
+
             document.getElementById("name").value = d.name;
             document.getElementById("spec").value = d.spec;
             document.getElementById("phone").value = d.phone;
@@ -67,7 +75,7 @@ if(currentKey === ""){
     window.location.href = "doctor.html";
 }
 
-// 💾 Update profile
+// 💾 Update profile (FIXED 🔥)
 function update(){
     let old = JSON.parse(localStorage.getItem(currentKey));
 
@@ -76,7 +84,8 @@ function update(){
         spec: document.getElementById("spec").value,
         phone: document.getElementById("phone").value,
         email: email,
-        premium: old.premium
+        premium: old.premium,
+        photo: old.photo   // 🔥 PHOTO SAFE
     };
 
     localStorage.setItem(currentKey, JSON.stringify(d));
@@ -89,7 +98,15 @@ function logout(){
     alert("Logged out 👋");
     window.location.href = "login.html";
 }
+
+// 📸 Upload photo (SAFE 🔥)
 function upload(e){
+
+    if(!currentKey){
+        alert("Error ❌");
+        return;
+    }
+
     let file = e.target.files[0];
     let reader = new FileReader();
 
@@ -105,6 +122,30 @@ function upload(e){
     }
 
     reader.readAsDataURL(file);
+}
+
+// 📅 Appointments show (SAFE LOAD 🔥)
+window.onload = function(){
+
+    let list = JSON.parse(localStorage.getItem("appointments") || "[]");
+
+    let container = document.getElementById("appointments");
+
+    container.innerHTML = "";
+
+    list.reverse().forEach(a => {
+
+        let div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <h4>👤 ${a.name}</h4>
+            <p>📅 ${a.date}</p>
+        `;
+
+        container.appendChild(div);
+    });
+
 }
 </script>
 
